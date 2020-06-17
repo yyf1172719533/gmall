@@ -29,10 +29,7 @@ public class PmsBaseCatalogController {
     private PmsBaseCatalog2Service pmsBaseCatalog2Service;
     @Reference
     private PmsBaseCatalog3Service pmsBaseCatalog3Service;
-    @Reference
-    private PmsBaseAttrValService pmsBaseAttrValService;
-    @Reference
-    private PmsBaseAttrInfoService pmsBaseAttrInfoService;
+    
     
     @RequestMapping("getCatalog1")
     public List<PmsBaseCatalog1> getCatalog1() {
@@ -53,17 +50,5 @@ public class PmsBaseCatalogController {
         return this.pmsBaseCatalog3Service.listByMap(map);
     }
     
-    @RequestMapping("getAttrValueList")
-    public List<PmsBaseAttrValue> getAttrValueList(Long attrId) {
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("attr_id", attrId);
-        return this.pmsBaseAttrValService.listByMap(map);
-    }
     
-    @RequestMapping("attrInfoList")
-    public List<PmsBaseAttrInfo> attrInfoList(Long catalog3Id) {
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("catalog3_id", catalog3Id);
-        return this.pmsBaseAttrInfoService.listByMap(map);
-    }
 }

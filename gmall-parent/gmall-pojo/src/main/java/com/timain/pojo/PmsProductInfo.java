@@ -15,23 +15,26 @@ import java.util.List;
 /**
  * @author yyf
  * @version 1.0
- * @date 2020/6/16 16:02
+ * @date 2020/6/17 15:11
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@TableName("pms_base_attr_info")
-public class PmsBaseAttrInfo implements Serializable {
+@TableName("pms_product_info")
+public class PmsProductInfo implements Serializable {
     
-    private static final long serialVersionUID = 7627517711373515707L;
+    private static final long serialVersionUID = -916365190659221097L;
     
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;  //编号
-    private String attrName;  //属性名称
-    private Long catalog3Id;
-    private String isEnabled; //启用-1  停用-0
+    private Long id;  //商品ID
+    private String productName;  //商品名称
+    private String description;  //商品描述
+    private Long catalog3Id;   //三级分类ID
+    private Long tmId;   //品牌ID
     
     @TableField(exist = false)
-    private List<PmsBaseAttrValue> attrValueList;
+    private List<PmsProductImage> pmsProductImages;
+    @TableField(exist = false)
+    private List<PmsProductSaleAttr> pmsProductSaleAttrs;
 }

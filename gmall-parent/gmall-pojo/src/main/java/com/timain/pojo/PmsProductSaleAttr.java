@@ -15,23 +15,23 @@ import java.util.List;
 /**
  * @author yyf
  * @version 1.0
- * @date 2020/6/16 16:02
+ * @date 2020/6/17 16:44
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@TableName("pms_base_attr_info")
-public class PmsBaseAttrInfo implements Serializable {
+@TableName("pms_product_sale_attr")
+public class PmsProductSaleAttr implements Serializable {
     
-    private static final long serialVersionUID = 7627517711373515707L;
+    private static final long serialVersionUID = -2059647408103136515L;
     
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;  //编号
-    private String attrName;  //属性名称
-    private Long catalog3Id;
-    private String isEnabled; //启用-1  停用-0
+    private Long id;  
+    private Long productId;  //商品ID
+    private Long saleAttrId;  //销售属性ID
+    private String saleAttrName;   //销售属性名称
     
     @TableField(exist = false)
-    private List<PmsBaseAttrValue> attrValueList;
+    private List<PmsProductSaleAttrVal> pmsProductSaleAttrVals;
 }

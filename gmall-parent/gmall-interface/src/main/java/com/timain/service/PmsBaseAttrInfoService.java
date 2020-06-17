@@ -9,4 +9,6 @@ import com.timain.pojo.PmsBaseAttrInfo;
  * @date 2020/6/16 16:40
  */
 public interface PmsBaseAttrInfoService extends IService<PmsBaseAttrInfo> {
+    
+    void saveAttrInfo(PmsBaseAttrInfo pmsBaseAttrInfo);
 }
