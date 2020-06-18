@@ -5,9 +5,8 @@ import com.timain.pojo.PmsProductInfo;
 import com.timain.service.PmsBaseSaleAttrService;
 import com.timain.service.PmsProductInfoService;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,5 +36,15 @@ public class PmsProductInfoController {
     @RequestMapping("baseSaleAttrList")
     public List<PmsBaseSaleAttr> baseSaleAttrList() {
         return this.pmsBaseSaleAttrService.list();
+    }
+    
+    @RequestMapping("fileUpload")
+    public void fileUpload(@RequestParam("file") MultipartFile multipartFile) {
+        
+    }
+    
+    @RequestMapping("saveSpuInfo")
+    public void saveSpuInfo(@RequestBody PmsProductInfo pmsProductInfo) {
+        System.out.println(pmsProductInfo);
     }
 }

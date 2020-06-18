@@ -33,5 +33,5 @@ public class PmsProductSaleAttr implements Serializable {
     private String saleAttrName;   //销售属性名称
     
     @TableField(exist = false)
-    private List<PmsProductSaleAttrVal> pmsProductSaleAttrVals;
+    private List<PmsProductSaleAttrVal> spuSaleAttrValueList;
 }

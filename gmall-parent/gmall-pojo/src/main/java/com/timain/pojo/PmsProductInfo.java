@@ -34,7 +34,7 @@ public class PmsProductInfo implements Serializable {
     private Long tmId;   //品牌ID
     
     @TableField(exist = false)
-    private List<PmsProductImage> pmsProductImages;
+    private List<PmsProductImage> spuImageList;
     @TableField(exist = false)
-    private List<PmsProductSaleAttr> pmsProductSaleAttrs;
+    private List<PmsProductSaleAttr> spuSaleAttrList;
 }
