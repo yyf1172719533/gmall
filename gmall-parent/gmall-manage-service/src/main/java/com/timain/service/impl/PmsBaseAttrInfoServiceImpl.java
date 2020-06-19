@@ -6,10 +6,11 @@ import com.timain.mapper.PmsBaseAttrValMapper;
 import com.timain.pojo.PmsBaseAttrInfo;
 import com.timain.pojo.PmsBaseAttrValue;
 import com.timain.service.PmsBaseAttrInfoService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @date 2020/6/16 16:40
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PmsBaseAttrInfoServiceImpl extends ServiceImpl<PmsBaseAttrInfoMapper, PmsBaseAttrInfo> implements PmsBaseAttrInfoService {
     
     @Autowired
@@ -42,5 +44,18 @@ public class PmsBaseAttrInfoServiceImpl extends ServiceImpl<PmsBaseAttrInfoMappe
                 pmsBaseAttrValMapper.insert(pmsBaseAttrValue);
             }
         }
+    }
+
+    public List<PmsBaseAttrInfo> findAttrInfos(Long catalog3Id) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("catalog3_id", catalog3Id);
+        List<PmsBaseAttrInfo> pmsBaseAttrInfos = this.getBaseMapper().selectByMap(map);
+        map.clear();
+        for (PmsBaseAttrInfo pmsBaseAttrInfo : pmsBaseAttrInfos) {
+            map.put("attr_id", pmsBaseAttrInfo.getId());
+            List<PmsBaseAttrValue> pmsBaseAttrValues = this.pmsBaseAttrValMapper.selectByMap(map);
+            pmsBaseAttrInfo.setAttrValueList(pmsBaseAttrValues);
+        }
+        return pmsBaseAttrInfos;
     }
 }

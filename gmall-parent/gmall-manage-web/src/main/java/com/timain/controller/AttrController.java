@@ -38,9 +38,7 @@ public class AttrController {
 
     @RequestMapping("attrInfoList")
     public List<PmsBaseAttrInfo> attrInfoList(Long catalog3Id) {
-        Map<String, Object> map = new LinkedHashMap<String, Object>();
-        map.put("catalog3_id", catalog3Id);
-        return this.pmsBaseAttrInfoService.listByMap(map);
+        return this.pmsBaseAttrInfoService.findAttrInfos(catalog3Id);
     }
     
     @RequestMapping("saveAttrInfo")

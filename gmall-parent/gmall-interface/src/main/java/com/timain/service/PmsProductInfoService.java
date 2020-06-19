@@ -9,4 +9,6 @@ import com.timain.pojo.PmsProductInfo;
  * @date 2020/6/17 15:16
  */
 public interface PmsProductInfoService extends IService<PmsProductInfo> {
+    
+    void saveSpuInfo(PmsProductInfo pmsProductInfo);
 }

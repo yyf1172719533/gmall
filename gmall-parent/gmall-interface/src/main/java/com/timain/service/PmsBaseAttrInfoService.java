@@ -3,6 +3,8 @@ package com.timain.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.timain.pojo.PmsBaseAttrInfo;
 
+import java.util.List;
+
 /**
  * @author yyf
  * @version 1.0
@@ -11,4 +13,6 @@ import com.timain.pojo.PmsBaseAttrInfo;
 public interface PmsBaseAttrInfoService extends IService<PmsBaseAttrInfo> {
     
     void saveAttrInfo(PmsBaseAttrInfo pmsBaseAttrInfo);
+    
+    List<PmsBaseAttrInfo> findAttrInfos(Long catalog3Id);
 }

@@ -7,3 +7,16 @@ dubbo:
 server:
   port: 8082
 
+fdfs:
+  so-timeout: 2500   #读取时间
+  connect-timeout: 6000   #连接超时时间
+  tracker-list:      #tracker服务配置地址列表
+    - 192.168.254.129:22122
+
+upload:
+  base-url: http://192.168.254.129:8081/
+  allow-types:
+    - image/jpeg
+    - image/png
+    - image/bmp
+    - image/gif

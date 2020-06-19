@@ -4,7 +4,9 @@ import com.timain.pojo.PmsBaseSaleAttr;
 import com.timain.pojo.PmsProductInfo;
 import com.timain.service.PmsBaseSaleAttrService;
 import com.timain.service.PmsProductInfoService;
+import com.timain.utils.UploadUtils;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +27,8 @@ public class PmsProductInfoController {
     private PmsProductInfoService pmsProductInfoService;
     @Reference
     private PmsBaseSaleAttrService pmsBaseSaleAttrService;
+    @Autowired
+    private UploadUtils uploadUtils;
     
     @RequestMapping("spuList")
     public List<PmsProductInfo> spuList(Long catalog3Id) {
@@ -39,12 +43,12 @@ public class PmsProductInfoController {
     }
     
     @RequestMapping("fileUpload")
-    public void fileUpload(@RequestParam("file") MultipartFile multipartFile) {
-        
+    public String fileUpload(@RequestParam("file") MultipartFile multipartFile) {
+        return uploadUtils.uploadFile(multipartFile);
     }
     
     @RequestMapping("saveSpuInfo")
     public void saveSpuInfo(@RequestBody PmsProductInfo pmsProductInfo) {
-        System.out.println(pmsProductInfo);
+        this.pmsProductInfoService.saveSpuInfo(pmsProductInfo);
     }
 }
