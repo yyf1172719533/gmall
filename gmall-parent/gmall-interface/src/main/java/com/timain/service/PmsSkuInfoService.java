@@ -1,7 +1,10 @@
 package com.timain.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.timain.pojo.PmsProductSaleAttr;
 import com.timain.pojo.PmsSkuInfo;
+
+import java.util.List;
 
 /**
  * @author yyf
@@ -11,4 +14,8 @@ import com.timain.pojo.PmsSkuInfo;
 public interface PmsSkuInfoService extends IService<PmsSkuInfo> {
     
     void insertSkuInfo(PmsSkuInfo pmsSkuInfo);
+    
+    PmsSkuInfo findById(Long skuId);
+    
+    List<PmsProductSaleAttr> findProSaleAttr(Long skuId, Long productId);
 }

@@ -1,6 +1,7 @@
 package com.timain.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -29,4 +30,7 @@ public class PmsProductSaleAttrVal implements Serializable {
     private Long productId;   //商品ID
     private Long saleAttrId;  //销售属性ID
     private String saleAttrValueName;  //销售属性值名称
+    
+    @TableField(exist = false)
+    private Boolean isChecked;  //是否选中
 }
