@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.timain.mapper.PmsSkuInfoMapper">
+    
+    <select id="findById" resultMap="selectAllByMap">
+        SELECT psi.*, ssav.*, psi.id as psi_id , ssav.id as ssav_id
+        FROM pms_sku_info psi,pms_sku_sale_attr_value ssav
+        WHERE psi.id = ssav.sku_id
+        AND psi.product_id = #{productId,jdbcType=BIGINT}
+    </select>
+    <resultMap id="selectAllByMap" type="com.timain.pojo.PmsSkuInfo" autoMapping="true">
+        <result column="psi_id" property="id"></result>
+        <collection property="skuSaleAttrValueList" ofType="com.timain.pojo.PmsSkuSaleAttrValue" autoMapping="true">
+            <result column="ssav_id" property="id"></result>
+        </collection>
+    </resultMap>
+</mapper>

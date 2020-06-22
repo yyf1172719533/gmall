@@ -1,5 +1,6 @@
 package com.timain.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.timain.pojo.PmsProductSaleAttr;
 import com.timain.pojo.PmsSkuInfo;
 import com.timain.service.PmsSkuInfoService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yyf
@@ -26,8 +28,11 @@ public class ItemController {
     public String item(@PathVariable Long skuId, Model model) {
         PmsSkuInfo pmsSkuInfo = pmsSkuInfoService.findById(skuId);
         List<PmsProductSaleAttr> productSaleAttrList = pmsSkuInfoService.findProSaleAttr(skuId, pmsSkuInfo.getProductId());
+        Map<String, Object> map = pmsSkuInfoService.findSkuInfoById(pmsSkuInfo.getProductId());
+        String skuValueJson = JSON.toJSONString(map);
         model.addAttribute("spuSaleAttrListCheckBySku", productSaleAttrList);
         model.addAttribute("skuInfo", pmsSkuInfo);
+        model.addAttribute("skuValueJson", skuValueJson);
         return "item";
     }
 }

@@ -32,5 +32,5 @@ public class PmsProductSaleAttrVal implements Serializable {
     private String saleAttrValueName;  //销售属性值名称
     
     @TableField(exist = false)
-    private Boolean isChecked;  //是否选中
+    private String isChecked;  //是否选中
 }

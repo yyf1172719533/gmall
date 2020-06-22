@@ -5,6 +5,7 @@ import com.timain.pojo.PmsProductSaleAttr;
 import com.timain.pojo.PmsSkuInfo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author yyf
@@ -18,4 +19,6 @@ public interface PmsSkuInfoService extends IService<PmsSkuInfo> {
     PmsSkuInfo findById(Long skuId);
     
     List<PmsProductSaleAttr> findProSaleAttr(Long skuId, Long productId);
+    
+    Map<String, Object> findSkuInfoById(Long productId);
 }
