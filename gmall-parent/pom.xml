@@ -38,6 +38,7 @@
         <httpclient.version>4.5.12</httpclient.version>
         <commons-codec.version>1.14</commons-codec.version>
         <jedis.version>3.1.0</jedis.version>
+        <redisson.version>3.13.1</redisson.version>
     </properties>
     
     <dependencyManagement>
@@ -92,6 +93,11 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

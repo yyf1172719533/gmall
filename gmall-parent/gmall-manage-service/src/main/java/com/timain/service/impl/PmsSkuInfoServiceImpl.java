@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.params.SetParams;
 
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author yyf
@@ -68,16 +70,35 @@ public class PmsSkuInfoServiceImpl extends ServiceImpl<PmsSkuInfoMapper, PmsSkuI
             pmsSkuInfo = JSON.parseObject(skuJson, PmsSkuInfo.class);
         } else {
             //设置分布式锁
-            /*jedis.set("sku:" + skuId + ":lock", "1", "nx", "px", 10);*/
-            pmsSkuInfo = getSkuInfos(skuId);
-            if (null!=pmsSkuInfo) {
-                jedis.set(skuKey, JSON.toJSONString(pmsSkuInfo));
+            SetParams params = new SetParams().nx().px(10*1000);
+            String token = UUID.randomUUID().toString();
+            String OK = jedis.set("sku:" + skuId + ":lock", token, params);
+            if (StringUtils.isNotBlank(OK) && "OK".equals(OK)) {
+                //设置分布式锁成功，有权在10秒的过期时间内访问mysql数据库
+                pmsSkuInfo = getSkuInfos(skuId);
+                if (null!=pmsSkuInfo) {
+                    //查询mysql数据库结果存入redis中
+                    jedis.set(skuKey, JSON.toJSONString(pmsSkuInfo));
+                } else {
+                    //数据库中不存在该skuId所对应的结果，为了缓存穿透，将null值或空字符串设置给redis
+                    jedis.setex(skuKey, 60*3, JSON.toJSONString(""));
+                }
+                //访问mysql后，删除分布式锁
+                String localToken = jedis.get("sku:" + skuId + ":lock");
+                if (StringUtils.isNotBlank(localToken) && token.equals(localToken)) {
+                    jedis.del("sku:" + skuId + ":lock");
+                }
             } else {
-                //为了缓存穿透，将null值或空字符串设置给redis
-                jedis.setex(skuKey, 60*3, JSON.toJSONString(""));
+                try {
+                    //设置失败，自旋
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return findById(skuId);
             }
-            
         }
+        jedis.close();
         return pmsSkuInfo;
     }
     
