@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.254.129:3306/gmall?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+      password: 123456
+      username: root
+
+  elasticsearch:
+    rest:
+      uris: http://192.168.254.129:9200
+
+mybatis-plus:
+  #configuration:
+    #map-underscore-to-camel-case: false
+  mapper-locations: classpath:mappers/*.xml
+
+
+dubbo:
+  application:
+    name: search-service
+  registry:
+    address: zookeeper://192.168.254.129:2181
+  protocol:
+    name: dubbo
+    port: 20880
+logging:
+  level: 
+    com.timain.mapper: debug
+
+
+
+
+server:
+  port: 8084

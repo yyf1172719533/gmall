@@ -1,7 +1,8 @@
 dubbo:
   application:
-    name: item-web
+    name: search-web
   registry:
     address: zookeeper://192.168.254.129:2181
+    
 server:
-  port: 8083
+  port: 8085
