@@ -32,7 +32,7 @@
         <mybatis-plus.version>3.3.0</mybatis-plus.version>
         <dubbo.version>2.7.3</dubbo.version>
         <commons-lang3.version>3.7</commons-lang3.version>
-        <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <mybatis.version>2.1.2</mybatis.version>
         <fastjson.version>1.2.62</fastjson.version>
         <httpclient.version>4.5.12</httpclient.version>
